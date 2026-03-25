@@ -16,7 +16,7 @@ sites:
     url: https://api.fastladacad.com/api/v1/auth/login
     method: POST
     headers:
-      Content-Type: application/json
+      - "Content-Type: application/json"
     body: '{"email":"healthcheck@fastladacad.com","password":"healthcheck-canary-probe"}'
     expectedStatusCodes:
       - 401  # Invalid credentials = auth service is working
