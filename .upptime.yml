@@ -1,0 +1,50 @@
+owner: FastLadAcad
+repo: status
+
+sites:
+  - name: API Health
+    url: https://api.fastladacad.com/health
+    expectedStatusCodes:
+      - 200
+
+  - name: API Deep Health
+    url: https://api.fastladacad.com/health/ready
+    expectedStatusCodes:
+      - 200
+
+  - name: Auth Login
+    url: https://api.fastladacad.com/api/v1/auth/login
+    method: POST
+    headers:
+      Content-Type: application/json
+    body: '{"email":"healthcheck@fastladacad.com","password":"healthcheck-canary-probe"}'
+    expectedStatusCodes:
+      - 401  # Invalid credentials = auth service is working
+      - 429  # Rate limited = service is working
+
+  - name: Frontend
+    url: https://app.fastladacad.com
+    expectedStatusCodes:
+      - 200
+
+status-website:
+  cname: status.fastladacad.com
+  name: Fast Lad Academy Status
+  theme: dark
+  introTitle: "**Fast Lad Academy** is [UP](https://app.fastladacad.com)"
+  introMessage: Real-time service status for the Fast Lad Academy platform.
+  navbar:
+    - title: Platform
+      href: https://app.fastladacad.com
+    - title: GitHub
+      href: https://github.com/FastLadAcad/platform
+
+notifications:
+  - type: discord
+    channel: status-alerts
+
+workflowSchedule:
+  uptime: "*/5 * * * *"    # Check every 5 minutes
+  response: "*/5 * * * *"
+  graphs: "0 0 * * *"      # Daily graph updates
+  summary: "0 0 * * *"
