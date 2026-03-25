@@ -44,7 +44,7 @@ notifications:
     channel: status-alerts
 
 workflowSchedule:
-  uptime: "*/5 * * * *"    # Check every 5 minutes
-  response: "*/5 * * * *"
+  uptime: "*/30 * * * *"    # Check every 5 minutes
+  response: "*/30 * * * *"
   graphs: "0 0 * * *"      # Daily graph updates
   summary: "0 0 * * *"
